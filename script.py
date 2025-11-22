@@ -1,26 +1,3 @@
-"""
-script.py
----------
-Realistic Wave Flag Mapping
-
-This script:
-1. Loads the input flag + pattern images
-2. Detects the cloth region (removes pole)
-3. Extracts 4 corner points of the flag cloth
-4. Warps the pattern to fit the cloth region
-5. Extracts realistic folds from the original flag
-6. Applies displacement to the warped pattern
-7. Feathers & composites without white patches
-8. Saves Output.jpg
-
-Dependencies:
-- OpenCV (cv2)
-- NumPy
-- Matplotlib (optional, only for display)
-
-Author: Your Name
-"""
-
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -211,43 +188,41 @@ def composite(flag, warped, alpha, pole_mask):
 # ============================================================
 # MAIN
 # ============================================================
-def main():
+def main(flag_img=None, pattern_img=None):
+    """
+    Streamlit-compatible main function.
+    Accepts images as numpy arrays.
+    """
 
-    try:
+    # Load from paths if not provided
+    if flag_img is None:
         flag = load_image(flag_path)
+    else:
+        flag = flag_img
+
+    if pattern_img is None:
         pattern = load_image(pattern_path)
-    except FileNotFoundError as e:
-        print(e)
-        return
+    else:
+        pattern = pattern_img
 
-    print("[1] Removing pole...")
+    # 1. Cloth detection
     cloth_mask, pole_mask, cloth_contour = remove_pole_and_get_cloth_mask(flag)
-    show(cloth_mask, "Cloth Mask")
 
-    print("[2] Extracting corners...")
+    # 2. Extract corners
     dst = extract_corners_from_contour(cloth_contour)
-    overlay = flag.copy()
-    for p in dst:
-        cv2.circle(overlay, (int(p[0]),int(p[1])), 8, (0,0,255), -1)
-    show(overlay, "Corners")
 
-    print("[3] Warping pattern...")
+    # 3. Warp pattern & mask
     warped, warped_mask = warp_pattern_and_mask(pattern, flag.shape[:2], dst)
 
-    print("[4] Extracting realistic folds...")
-    dx,dy = extract_realistic_folds(flag, cloth_mask, strength=12)
+    # 4. Extract real folds and apply displacement
+    dx, dy = extract_realistic_folds(flag, cloth_mask, strength=12)
     folded = apply_displacement(warped, dx, dy)
 
-    print("[5] Compositing final image...")
+    # 5. Feather mask + composite
     alpha = feather_mask(warped_mask, cloth_mask, pole_mask, feather_px=35)
     final = composite(flag, folded, alpha, pole_mask)
-    show(final, "FINAL OUTPUT")
-
-    cv2.imwrite(output_path, final)
-    print("Saved:", output_path)
 
     return final
-
 
 # Run script
 if __name__ == "__main__":
