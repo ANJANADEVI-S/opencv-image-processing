@@ -1,15 +1,40 @@
-# OpenCV Image Processing  
-This repository contains a simple Python project using OpenCV and NumPy for image processing.
+# OpenCV Image Processing – Realistic Flag Warping
 
-## Files  
-- `script.py` — Python script that loads an image, applies grayscale conversion, Gaussian blur, and Canny edge detection.  
-- `Output.jpg` — Resulting image saved after processing.  
-- `README.md` — Explanation and setup instructions.
+This repository contains a Python project that applies a pattern image onto a plain flag and generates realistic, smooth cloth folds using OpenCV and NumPy.  
+A Streamlit app is also included for an interactive demo.
 
-## Setup & Run  
-1. Ensure Python 3.x is installed along with OpenCV and NumPy:  
+---
+
+## 📁 Files in This Repository
+
+- **script.py** — Main processing script  
+  - Detects cloth area  
+  - Removes flag pole  
+  - Extracts flag corners  
+  - Warps the pattern  
+  - Generates realistic folds  
+  - Composites final output  
+
+- **app.py** — Streamlit web app  
+  - Upload a pattern + flag  
+  - Generates the waving flag interactively  
+
+- **output.png** — Example processed output  
+
+- **pattern.png / flag.png** — Input sample images  
+
+- **requirements.txt** — Package dependencies  
+
+- **README.md** — Project explanation and instructions  
+
+---
+
+## ▶️ Run the Script (Local)
+
+1. Install dependencies:
    ```bash
-   pip install opencv-python numpy
+   pip install -r requirements.txt
+
 # opencv-image-processing
 Minimal OpenCV assignment with script, output, and explanation.
 
