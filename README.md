@@ -1,42 +1,40 @@
 # OpenCV Image Processing – Realistic Flag Warping
 
-This repository contains a Python project that applies a pattern image onto a plain flag and generates realistic, smooth cloth folds using OpenCV and NumPy.  
-A Streamlit app is also included for an interactive demo.
+This project demonstrates a complete image-processing pipeline using OpenCV and NumPy to apply a custom pattern onto a plain white flag while generating natural, smooth cloth folds.  
+A Streamlit web interface is also included for interactive testing.
 
-Minimal OpenCV assignment with script, output, and explanation.
+Minimal OpenCV assignment with script, output image, and short explanation.
 
-The script detects the cloth region of the flag, removes the pole, and extracts its four corners. The pattern image is perspective-warped to match the cloth geometry. Realistic folds are generated directly from the original flag using heavily smoothed gradient normals, producing natural displacement without noise. The warped pattern is remapped using this displacement field, feathered with distance-based alpha blending, and composited back onto the flag while preserving the pole. The result is a clean, realistic, gently waving flag.
+The system identifies the cloth region, removes the pole, extracts the flag’s four corners, and warps the pattern accordingly. Real cloth folds are computed from the original flag using smoothed gradient normals to generate realistic displacement. The warped pattern is then remapped through this fold field, feather-blended, and composited onto the flag while retaining the pole area. The final output is a clean, realistic, gently waving flag.
+
 ---
+
 ## 🌐 Live Demo
-Click below to try the interactive waving-flag generator:
+Try the interactive waving-flag generator here:
 
-👉 https://<[OpenCV Flag Pattern Mapping](https://opencv-image-processing-6szfi23zhssangwtynnynw.streamlit.app/)>
-
-## 📁 Files in This Repository
-
-- **script.py** — Main processing script  
-  - Detects cloth area  
-  - Removes flag pole  
-  - Extracts flag corners  
-  - Warps the pattern  
-  - Generates realistic folds  
-  - Composites final output  
-
-- **app.py** — Streamlit web app  
-  - Upload a pattern + flag  
-  - Generates the waving flag interactively  
-
-- **output.png** — Example processed output  
-
-- **pattern.png / flag.png** — Input sample images  
-
-- **requirements.txt** — Package dependencies  
-
-- **README.md** — Project explanation and instructions  
+👉 **https://opencv-image-processing-6szfi23zhssangwtynnynw.streamlit.app**
 
 ---
 
-## ▶️ Run the Script (Local)
+## 📁 Repository Contents
+
+- **script.py** — Core OpenCV pipeline  
+  - Cloth detection  
+  - Pole removal  
+  - Corner extraction  
+  - Pattern warping  
+  - Real fold generation  
+  - Final compositing  
+
+- **app.py** — Streamlit application for browser-based interaction  
+- **output.png** — Sample final rendered result  
+- **flag.png / pattern.png** — Input examples  
+- **requirements.txt** — Required Python packages  
+- **README.md** — Documentation and instructions  
+
+---
+
+## ▶️ Running the Script Locally
 
 1. Install dependencies:
    ```bash
