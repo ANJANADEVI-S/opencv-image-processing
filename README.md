@@ -3,6 +3,9 @@
 This repository contains a Python project that applies a pattern image onto a plain flag and generates realistic, smooth cloth folds using OpenCV and NumPy.  
 A Streamlit app is also included for an interactive demo.
 
+Minimal OpenCV assignment with script, output, and explanation.
+
+The script detects the cloth region of the flag, removes the pole, and extracts its four corners. The pattern image is perspective-warped to match the cloth geometry. Realistic folds are generated directly from the original flag using heavily smoothed gradient normals, producing natural displacement without noise. The warped pattern is remapped using this displacement field, feathered with distance-based alpha blending, and composited back onto the flag while preserving the pole. The result is a clean, realistic, gently waving flag.
 ---
 ## 🌐 Live Demo
 Click below to try the interactive waving-flag generator:
@@ -38,8 +41,3 @@ Click below to try the interactive waving-flag generator:
 1. Install dependencies:
    ```bash
    pip install -r requirements.txt
-
-# opencv-image-processing
-Minimal OpenCV assignment with script, output, and explanation.
-
-The script detects the cloth region of the flag, removes the pole, and extracts its four corners. The pattern image is perspective-warped to match the cloth geometry. Realistic folds are generated directly from the original flag using heavily smoothed gradient normals, producing natural displacement without noise. The warped pattern is remapped using this displacement field, feathered with distance-based alpha blending, and composited back onto the flag while preserving the pole. The result is a clean, realistic, gently waving flag.
